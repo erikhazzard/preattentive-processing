@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <script src="d3.js" charset="utf-8"></script>
+    <script>
+'use strict'
+
+var w = 1000, h = 50, delay = 84, clickable = false
+var svg = d3.select('body').append('svg')
+  .attr({width: w, height: h})
+  .style('background-color', 'rgba(0, 0, 0, 0.1)')
+
+var data = d3.range(10).map(function(d) {
+  return {idx: d, active: false}
+})
+
+var o = d3.scale.ordinal()
+  .domain(data.map(function(d){ return d.idx }))
+  .rangePoints([0, w], 1)
+
+var stageBG = svg.append('rect')
+  .attr({width: w, height: h})
+  .style('fill', 'none')
+
+var stage = svg.append('g')
+var points = stage.selectAll('g').data(data)
+  .enter().append('g')
+  .attr('transform', function(d) {
+    return 'translate(' + [ o(d.idx), h / 2 ] + ')'
+  })
+
+points.append('rect')
+  .style('opacity', 0)
+  .attr({
+    x: - w / data.length / 2,
+    y: - w / data.length / 2,
+    width: w / data.length,
+    height: h
+  })
+  .on('click', function(d) {
+    clickable  && endGame(d.active)
+  })
+
+var innerShapes = points.append('g')
+  .call(redrawPoint)
+  .style('pointer-events', 'none')
+
+stage.style('opacity', 0)
+
+function redrawPoint(g) {
+  g.selectAll('*').remove()
+  if (false) // color
+    return g.append('circle')
+      .attr('r', 10)
+      .style('stroke', '#34495e')
+      .style('fill', function(d) {
+        return d.active ? '#34495e' : 'none'
+      })
+  if (false) // shape
+    return g.each(function(d, i) {
+      var g = d3.select(this)
+      if (d.active) {
+        g.append('circle').style('fill', '#34495e')
+          .attr('r', 10)
+      } else {
+        g.append('rect')
+          .attr({width: 20, height: 20, x: -10, y: -10})
+          .style('fill', '#34495e')
+      }
+    })
+  if (false)  // rotation rect by 45 degrees
+    g.append('rect')
+      .attr({width: 4, height: 20, x: -2, y: -10})
+      .style('fill', '#34495e')
+      .attr('transform', function(d) {
+        return d.active ? 'rotate(45)' : ''
+      })
+
+  if (false)  // rotation square by 45 degrees
+    g.append('rect')
+      .attr({width: 20, height: 20, x: -10, y: -10})
+      .style('fill', '#34495e')
+      .attr('transform', function(d) {
+        return d.active ? 'rotate(45)' : ''
+      })
+
+  if (false)  // rotation by 90 degrees
+    g.append('rect')
+      .attr({width: 20, height: 20, x: -10, y: -10})
+      .style('fill', '#34495e')
+      .attr('transform', function(d) { return d.active ? 'rotate(45)' : null })
+
+  if (true)  // rotation by 90 degrees
+    g.append('rect')
+      .attr({width: 20, height: 20, x: -10, y: -10})
+      .style('fill', function(d) { return d.active ? '#9b59b6' : '#3498db' })
+
+}
+
+function endGame(victory) {
+  stage.style('opacity', 0)
+    .transition()
+    .style('opacity', 1)
+    .transition()
+    .delay(2000)
+    .style('opacity', 0)
+    .each('end', function() {
+      go()
+    })
+  stageBG
+    .style('fill', victory ? '#2ecc71' : '#e74c3c')
+    .style('opacity', 0)
+    .transition()
+    .style('opacity', 1)
+    .transition()
+    .delay(2000)
+    .style('opacity', 0)
+}
+
+function go() {
+  data.map(function(d) { return d.active = false })
+  data[Math.floor(Math.random() * data.length)].active = true
+  innerShapes.call(redrawPoint)
+  setTimeout(function() {
+    stage.style('opacity', 0)
+    clickable = false
+    requestAnimationFrame(function() {
+      stage.style('opacity', 1)
+      setTimeout(function() {
+        stage.style('opacity', 0)
+        clickable = true
+      }, delay)
+    })
+  }, 2000)
+}
+
+go()
+
+    </script>
+  </body>
+</html>
