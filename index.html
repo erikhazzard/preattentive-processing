@@ -1,0 +1,53 @@
+<html>
+<head>
+<link href='http://fonts.googleapis.com/css?family=Khula:400,700' rel='stylesheet' type='text/css'>
+<link href='style.css' type='text/css' rel='stylesheet' />
+</head>
+<body>
+
+<h1>Pre-Attentive Processing</h1>
+
+<p>
+100ms is around how long it takes you to initiate eye movement (and hence, focus your attention). If you can detect something in under 100ms, it's under the threshold of focused attention. You can process the information before focusing your attention on it. This is called <em>Pre-attentive processing</em>
+</p>
+
+<p>
+Click below to flash empty squares, see if you can find the filled square. After 100ms it will go away. 
+<p>
+
+<p class='callout no-select'>
+Look at the box below then 
+<strong id='button-flash-test1'>click here to flash the boxes</strong>
+</p>
+
+<svg id='test-1' class='no-select'></svg>
+
+<p>
+Why is this useful? If you're designing a list of information (e.g., a twitter feed or a table of data), you often want to call attention to certain values. Just dumping all the data in front of a user creates a bad experience. If you can direct their attention to relevant / important data, you can guide their attention towards the data you want to illustrate.
+</p>
+
+
+<h2>Can't Pre-attentive Process This</h2>
+<p>
+The first example worked because there was a single feature to process: filled-in square. We can pre-attentively process a single distinguishing feature, but not multiple features. To demonstrate, the following example contains multiple filled circles and a single filled square. We cannot pre-attentively process this because of the multiple distinguishing features (filled <em>and</em> shape).
+</p>
+<p class='callout no-select'>
+Can you spot where the square is? If it appears in the spot your eyes are already focused on, there's a greater chance you'll see it. If it appears outside of where you eyes are focused on, chances are you'll miss it.
+
+<br />Look at the box below then 
+<strong id='button-flash-test2'>click here to flash it</strong>
+</p>
+<svg id='test-2' class='no-select'></svg>
+
+
+<h2> More examples </h2>
+TODO...how could we change the above example to take advantage of pre-attentive processing? We could use a different distinguishing dimension, such as color. If we made the filled square a color, we could pre-attentively process it...
+
+
+<script src="async.js" charset="utf-8"></script>
+<script src="d3.js" charset="utf-8"></script>
+<script src="lodash.js" charset="utf-8"></script>
+<script src="main.js" charset="utf-8"></script>
+
+</body>
+</html>

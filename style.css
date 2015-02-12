@@ -1,0 +1,47 @@
+html, body {
+    font-family: 'Khula', sans-serif;
+}
+svg { 
+    background: #fafafa;
+    cursor: not-allowed;
+    height: 400px;
+    width: 800px;
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    user-drag: none; 
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+}
+
+
+/* Test 1 */
+#button-flash-test1, #button-flash-test2 {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #336699;
+}
+#test-1-shapes, #test-2-shapes {
+    display: none;
+}
+
+
+/* Test 2 */
+
+
+
+
+.test-shape {
+    fill: none;
+    stroke: #707070;
+}
+.selected {
+    fill: #343434;
+    stroke: #343434;
+}
